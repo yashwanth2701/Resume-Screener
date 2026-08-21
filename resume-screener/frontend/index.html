@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Screenline — Smart Resume Screener</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◈</span>
+      <span class="brand-name">Screenline</span>
+    </div>
+    <div class="topbar-meta">
+      <span id="apiStatus" class="status-pill status-unknown">checking API…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Column 1: Resumes -->
+    <section class="panel" id="panel-resumes">
+      <div class="panel-head">
+        <h2>01 · Resumes</h2>
+        <p class="panel-sub">Upload PDF or .txt resumes to extract candidate data.</p>
+      </div>
+
+      <form id="uploadForm" class="upload-form">
+        <label class="file-drop" for="fileInput">
+          <span id="fileDropLabel">Drop a resume or click to browse</span>
+          <input type="file" id="fileInput" accept=".pdf,.txt" hidden />
+        </label>
+        <button type="submit" class="btn btn-primary">Parse &amp; store</button>
+      </form>
+
+      <div class="scroll-list" id="resumeList">
+        <p class="empty-hint">No resumes yet.</p>
+      </div>
+    </section>
+
+    <!-- Column 2: Job Description -->
+    <section class="panel" id="panel-job">
+      <div class="panel-head">
+        <h2>02 · Target role</h2>
+        <p class="panel-sub">Describe the role you're screening candidates against.</p>
+      </div>
+
+      <form id="jobForm" class="job-form">
+        <input type="text" id="jobTitle" placeholder="Job title (e.g. Backend Engineer)" required />
+        <textarea id="jobDescription" rows="8" placeholder="Paste the full job description…" required></textarea>
+        <input type="text" id="jobSkills" placeholder="Required skills, comma separated (optional)" />
+        <button type="submit" class="btn btn-primary">Save role</button>
+      </form>
+
+      <div class="scroll-list" id="jobList">
+        <p class="empty-hint">No roles saved yet.</p>
+      </div>
+    </section>
+
+    <!-- Column 3: Shortlist -->
+    <section class="panel panel-wide" id="panel-results">
+      <div class="panel-head panel-head-row">
+        <div>
+          <h2>03 · Shortlist</h2>
+          <p class="panel-sub">Run the LLM match to rank candidates for the selected role.</p>
+        </div>
+        <button id="runMatchBtn" class="btn btn-accent" disabled>Run matching ▸</button>
+      </div>
+
+      <div id="matchLoading" class="scan-loading hidden">
+        <div class="scan-bar"><div class="scan-fill"></div></div>
+        <span>Scoring candidates against role…</span>
+      </div>
+
+      <div class="results-table-wrap">
+        <table class="results-table" id="resultsTable">
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Fit score</th>
+              <th>Justification</th>
+              <th>Matched skills</th>
+              <th>Gaps</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr><td colspan="5" class="empty-hint">Save a role and click "Run matching" to see results.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>Backend: Spring Boot · Store: MongoDB · Matching: LLM (Claude)</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
