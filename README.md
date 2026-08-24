@@ -190,11 +190,14 @@ These are intentionally transparent, tunable rules rather than a black box — t
 
 ---
 
-## 7. Deliverables checklist (per project brief)
 
-- [x] Backend API (Spring Boot / Java)
-- [x] Frontend dashboard (HTML/CSS/JS)
-- [x] Database storage for parsed resumes (MongoDB)
-- [x] LLM-based semantic matching & scoring with justification
-- [ ] GitHub repo with commits — push this project to a repo of your own
-- [ ] 2–3 min demo video — record a walkthrough: upload resume → save job → run matching → view shortlist
+
+
+
+
+
+
+
+
+
+
